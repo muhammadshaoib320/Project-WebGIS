@@ -1,1 +1,37 @@
-<!DOCTYPE html><html><head><title>Shoaib
+<!DOCTYPE html>
+<html>
+<head>
+<title>WebGIS Project - Muhammad Shoaib 3023</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+body { margin:0; padding:0; }
+#map { width:100%; height:90vh; }
+.header { background:#0b3d91; color:white; padding:10px; text-align:center; font-family:Arial; }
+.info { padding:10px; background:white; font-family:Arial; }
+</style>
+</head>
+<body>
+<div class="header">
+<h2>WebGIS Project - DEM Analysis (205m - 3384m)</h2>
+<p>Muhammad Shoaib - Roll No 3023 - Rawalpindi Region</p>
+</div>
+<div id="map"></div>
+<div class="info">
+<b>Project Details:</b> This WebGIS shows Rawalpindi & Islamabad region. DEM Analysis shows elevation from 205m (low areas) to 3384m (Murree Hills). Created using QGIS & GitHub Pages.
+<br><b>Link:</b> https://muhammadshoaib320.github.io/Project-WebGIS/
+</div>
+<script>
+var map = L.map('map').setView([33.60, 73.10], 10);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: '© OpenStreetMap'
+}).addTo(map);
+L.marker([33.5651, 73.0169]).addTo(map).bindPopup("Rawalpindi City<br>Elevation: ~500m").openPopup();
+L.marker([33.6844, 73.0479]).addTo(map).bindPopup("Islamabad<br>Elevation: ~550m");
+L.marker([33.90, 73.39]).addTo(map).bindPopup("Murree Hills<br>Elevation: 205m - 3384m (High DEM)");
+L.circle([33.60, 73.10], {color: 'red', fillColor: '#f03', fillOpacity: 0.2, radius: 30000}).addTo(map).bindPopup("Study Area: Rawalpindi DEM Analysis");
+</script>
+</body>
+</html>
