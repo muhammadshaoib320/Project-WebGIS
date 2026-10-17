@@ -1,37 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>WebGIS Project - Muhammad Shoaib 3023</title>
+<title>WebGIS - Rawalpindi Petrol Pumps - Shoaib 3023</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-body { margin:0; padding:0; }
-#map { width:100%; height:90vh; }
-.header { background:#0b3d91; color:white; padding:10px; text-align:center; font-family:Arial; }
-.info { padding:10px; background:white; font-family:Arial; }
+body{margin:0;font-family:Arial}
+.header{background:#0b3d91;color:white;padding:12px;text-align:center}
+.header h2{margin:5px 0}
+#map{width:100%;height:82vh}
+.footer{background:#f2f2f2;padding:8px;text-align:center;font-size:13px}
 </style>
 </head>
 <body>
 <div class="header">
-<h2>WebGIS Project - DEM Analysis (205m - 3384m)</h2>
-<p>Muhammad Shoaib - Roll No 3023 - Rawalpindi Region</p>
+<h2>WebGIS Lab - Rawalpindi Petrol Pumps Analysis</h2>
+<p>Muhammad Shoaib - Roll No 3023 | Similar to Arshan Project | Rawalpindi Region</p>
 </div>
 <div id="map"></div>
-<div class="info">
-<b>Project Details:</b> This WebGIS shows Rawalpindi & Islamabad region. DEM Analysis shows elevation from 205m (low areas) to 3384m (Murree Hills). Created using QGIS & GitHub Pages.
-<br><b>Link:</b> https://muhammadshoaib320.github.io/Project-WebGIS/
-</div>
+<div class="footer">Data Source: OpenStreetMap | Petrol Pumps in Rawalpindi | Total 8 Stations | https://muhammadshoaib320.github.io/Project-WebGIS/</div>
 <script>
-var map = L.map('map').setView([33.60, 73.10], 10);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-attribution: '© OpenStreetMap'
-}).addTo(map);
-L.marker([33.5651, 73.0169]).addTo(map).bindPopup("Rawalpindi City<br>Elevation: ~500m").openPopup();
-L.marker([33.6844, 73.0479]).addTo(map).bindPopup("Islamabad<br>Elevation: ~550m");
-L.marker([33.90, 73.39]).addTo(map).bindPopup("Murree Hills<br>Elevation: 205m - 3384m (High DEM)");
-L.circle([33.60, 73.10], {color: 'red', fillColor: '#f03', fillOpacity: 0.2, radius: 30000}).addTo(map).bindPopup("Study Area: Rawalpindi DEM Analysis");
+var map = L.map('map').setView([33.60, 73.10], 11);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OSM'}).addTo(map);
+
+// Petrol Pump Icon
+var pumpIcon = L.icon({
+iconUrl: 'https://cdn-icons-png.flaticon.com/512/3771/3771570.png',
+iconSize: [32,32]
+});
+
+var pumps = [
+{lat:33.5651,lng:73.0169,name:"PSO Petrol Pump - Murree Road",area:"Rawalpindi City",type:"PSO"},
+{lat:33.6007,lng:73.0679,name:"Shell Petrol Pump - Saddar",area:"Saddar Rawalpindi",type:"Shell"},
+{lat:33.6265,lng:73.1060,name:"Total PARCO - Airport Road",area:"Chaklala",type:"Total"},
+{lat:33.5123,lng:73.2015,name:"PSO Pump - Rawat GT Road",area:"Rawat",type:"PSO"},
+{lat:33.6320,lng:73.0820,name:"Attock Petrol Pump - Chaklala Scheme 3",area:"Chaklala",type:"Attock"},
+{lat:33.5800,lng:72.9800,name:"PSO - Adiala Road",area:"Adiala Road",type:"PSO"},
+{lat:33.5200,lng:73.1000,name:"Shell - Bahria Town Phase 4",area:"Bahria Town",type:"Shell"},
+{lat:33.7000,lng:73.1500,name:"Total - GT Road Gujar Khan",area:"GT Road",type:"Total"}
+];
+
+pumps.forEach(function(p){
+L.marker([p.lat,p.lng],{icon:pumpIcon}).addTo(map).bindPopup("<b>"+p.name+"</b><br>Area: "+p.area+"<br>Type: "+p.type+"<br>City: Rawalpindi<br><hr>Roll No: 3023");
+});
+
+L.circle([33.60,73.10],{color:'blue',fillOpacity:0.1,radius:20000}).addTo(map).bindPopup("Rawalpindi Petrol Pumps Study Area");
 </script>
 </body>
 </html>
